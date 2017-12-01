@@ -1,0 +1,31 @@
+
+def part_1(captcha) =
+
+    ((captcha[i] |> int for i in range(len(captcha)) if check_digits(captcha, i, 1))
+        |> sum)
+
+def part_2(captcha) =
+
+    digits = list()
+
+    for i in range(len(captcha)):
+        if check_digits(captcha, i, len(captcha)/2 |> int):
+            digits.append(int(captcha[i]))
+
+    digits |> sum
+
+
+def check_digits(captcha, i, distance) =
+    j = ((i + distance), captcha |> len) |*> (%) |> int
+    captcha[i] == captcha[j]
+
+
+# -----------------------------------------------------------------------------
+
+if __name__ == '__main__':
+    
+    with open('day_1.txt', 'r') as f:
+        day_1_input = f.read()
+
+    day_1_input |> part_1 |> print
+    day_1_input |> part_2 |> print
